@@ -15,9 +15,9 @@ node {
 		app.push("latest")
 	}
 	}
-//        stage('docker stop container') {
-//            sh ("docker rm -f $(docker ps -a -q)")
-//        }
+        stage ('Stop Docker Containers') {
+		sh 'docker container rm -f $(docker ps -a)'
+	}
 	stage('Deploy') {
 		sh ("docker run -d -p 81:8080 -v /var/log/:/var/log/ ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
 	}
